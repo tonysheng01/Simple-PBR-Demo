@@ -61,11 +61,11 @@ unsigned int loadCubemap(std::vector<std::string> faces);
 void renderText(Shader &s, unsigned int VAO, unsigned int VBO, std::map<char, Character> &characters, std::string text, float x, float y, float scale, glm::vec3 color);
 
 // Screen settings
-// Framebuffer size should be set equal to window size unless using a retina display
+const bool retina = true; // Set to true only if using a retina display
 const unsigned int SCR_WIDTH = 1280; // Window width
 const unsigned int SCR_HEIGHT = 800; // Window height
-const unsigned int FB_WIDTH = 2 * SCR_WIDTH; // Framebuffer width
-const unsigned int FB_HEIGHT = 2 * SCR_HEIGHT; // Framebuffer height
+const unsigned int FB_WIDTH = retina ? 2 * SCR_WIDTH : SCR_WIDTH; // Framebuffer width
+const unsigned int FB_HEIGHT = retina ? 2 * SCR_HEIGHT : SCR_HEIGHT; // Framebuffer height
 
 // Camera
 glm::vec3 cameraPosDefault = glm::vec3(0.0f, 0.0f, 27.0f);
