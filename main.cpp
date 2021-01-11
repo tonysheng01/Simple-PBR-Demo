@@ -554,13 +554,37 @@ int main(int argc, const char * argv[]) {
         // Process mouse and keyboard inputs
         processInput(window);
         glfwPollEvents();
-        
-        // First render pass: the wall of spheres is rendered using the PBR shader
+     
+        // Clear buffers
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        
+        // First render pass: point lights are rendered with their positions updated in the PBR shader to be used later
         glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
         glm::mat4 view = camera.GetViewMatrix();
         glm::mat4 model = glm::mat4(1.0f);
+     
+        shaderLightSource.use();
+        shaderLightSource.setMat4("view", view);
+        shaderLightSource.setMat4("projection", projection);
         
+        for (unsigned int i = 0; i < sizeof(lightPositions) / sizeof(lightPositions[0]); ++i)
+        {
+            // Updating lighting information in the PBR shader
+            glm::vec3 newPos = lightPositions[i] + glm::vec3(sin(glfwGetTime()) * 5.0, 0.0f, 0.0f); // Point lights move horizontally in a periodic fashion
+            shaderPBR.use();
+            shaderPBR.setVec3("lightPositions[" + std::to_string(i) + "]", newPos);
+            shaderPBR.setVec3("lightColors[" + std::to_string(i) + "]", lightColors[i]);
+            
+            // Rendering point lights as smaller spheres
+            shaderLightSource.use();
+            model = glm::mat4(1.0f);
+            model = glm::translate(model, newPos);
+            model = glm::scale(model, glm::vec3(0.5f));
+            shaderLightSource.setMat4("model", model);
+            glDrawElements(GL_TRIANGLE_STRIP, indexCount, GL_UNSIGNED_INT, 0);
+        }
+        
+        // Second render pass: the wall of spheres is rendered using the PBR shader
         shaderPBR.use();
         shaderPBR.setMat4("view", view);
         shaderPBR.setMat4("projection", projection);
@@ -587,30 +611,7 @@ int main(int argc, const char * argv[]) {
             }
         }
         
-        // Point lights are also drawn to expose their positions
-        shaderLightSource.use();
-        shaderLightSource.setMat4("view", view);
-        shaderLightSource.setMat4("projection", projection);
-        
-        for (unsigned int i = 0; i < sizeof(lightPositions) / sizeof(lightPositions[0]); ++i)
-        {
-            // Updating lighting information in the PBR shader
-            // Point lights move horizontally in a periodic fashion
-            glm::vec3 newPos = lightPositions[i] + glm::vec3(sin(glfwGetTime()) * 5.0, 0.0f, 0.0f);
-            shaderPBR.use();
-            shaderPBR.setVec3("lightPositions[" + std::to_string(i) + "]", newPos);
-            shaderPBR.setVec3("lightColors[" + std::to_string(i) + "]", lightColors[i]);
-            
-            // Rendering point lights as smaller spheres
-            shaderLightSource.use();
-            model = glm::mat4(1.0f);
-            model = glm::translate(model, newPos);
-            model = glm::scale(model, glm::vec3(0.5f));
-            shaderLightSource.setMat4("model", model);
-            glDrawElements(GL_TRIANGLE_STRIP, indexCount, GL_UNSIGNED_INT, 0);
-        }
-        
-        // Second render pass: the surrounding skybox is rendered
+        // Third render pass: the surrounding skybox is rendered
         glBindVertexArray(cubeVAO);
         shaderSkybox.use();
         shaderSkybox.setMat4("view", view);
@@ -628,6 +629,7 @@ int main(int argc, const char * argv[]) {
         glfwSwapBuffers(window);
     }
     
+    // Close window and terminate program
     glfwTerminate();
     return 0;
 }
