@@ -544,7 +544,6 @@ int main(int argc, const char * argv[]) {
         lastFrame = currentFrame;
         frames++;
         
-        
         // Calculate FPS
         if (currentFrame - lastSecond >= 1) {
             FPS = frames / (currentFrame - lastSecond);
