@@ -1,6 +1,6 @@
 # Simple-PBR-Scene
 
-This is a simple scene created with the physically-based rendering (PBR) pipeline using OpenGL (Ver. 3.3), following [Joey de Vries' tutorial][tutorial] on PBR theory.
+This is a simple scene created with the physically-based rendering (PBR) pipeline using OpenGL 3.3, following [Joey de Vries' tutorial][tutorial] on PBR theory.
 
 
 ## About
