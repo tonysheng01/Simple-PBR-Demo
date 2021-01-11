@@ -5,7 +5,7 @@ This is a simple scene created with the physically-based rendering (PBR) pipelin
 
 ## About
 
-This demo consists of a matrix of 49 spheres, all with a plain white albedo but varying degrees of roughness and metalness. Roughness increases to the right of the matrix and metalness decreases towards the bottom. Both direct lighting and image-based lighting (IBL) techniques are demonstrated, involving 4 point lights with a warm fluorescent color (indicated by smaller spheres) and indirect illumination calculated by sampling the surrounding environment. Irradiance is modelled with the Cook-Torrance BRDF, using the Trowbridge-Reitz GGX for the NDF, the Schlick-GGX approximation for the geometry function and the Fresnel-Schlick approximation for the Fresnel equation.
+This demo consists of a matrix of 49 spheres, all with a plain white albedo but varying physical properties. Roughness increases to the right of the matrix and metalness decreases towards the bottom. Both direct lighting and image-based lighting (IBL) techniques are demonstrated, involving 4 point lights with a warm fluorescent color (indicated by smaller spheres) and indirect illumination calculated by sampling the surrounding environment. Irradiance is modelled with the Cook-Torrance BRDF, using the Trowbridge-Reitz GGX for the NDF, the Schlick-GGX approximation for the geometry function and the Fresnel-Schlick approximation for the Fresnel equation.
 
 > The demo includes a first-person fly style camera which enables free movement within the scene.
 
