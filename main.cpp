@@ -1,6 +1,6 @@
 /*
  Tony Sheng
- August 28th, 2020
+ December 21st, 2020
  
  This is a simple scene to demostrate basic properties of PBR and IBL.
  The demo consists of a wall of 49 balls and a skybox with fixed
