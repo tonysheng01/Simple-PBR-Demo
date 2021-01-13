@@ -16,11 +16,11 @@ This demo consists of a matrix of 49 spheres, all with a plain white albedo but 
 ## Dependencies
 
 To succcessfully run the demo you will need to download and link to your project the following libraries:
-- GLFW
-- GLAD (make sure you add glad.c to your project)
-- GLM
-- stb_image
-- FreeType
+- GLFW (3.3 or later)
+- GLAD (for OpenGL 3.3 or later)
+- GLM (0.9.9.8 or later)
+- stb_image (2.26 or later)
+- FreeType (2.10.4 or later)
 
 
 [tutorial]: https://learnopengl.com/PBR/Theory
