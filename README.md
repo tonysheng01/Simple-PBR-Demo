@@ -15,7 +15,7 @@ This demo consists of a matrix of 49 spheres, all with a plain white albedo but 
 
 ## Dependencies
 
-A functioning OpenGL (3.3 or later) environment is required to run the demo. Make sure you link to your project the following libraries:
+A functioning OpenGL (3.3 or later) environment is required to run the demo. Make sure you link to your project the following libraries and ensure all include paths are correct.
 - GLFW (3.3 or later)
 - GLAD (for OpenGL 3.3 or later)
 - GLM (0.9.9.8 or later)
